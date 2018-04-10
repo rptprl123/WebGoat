@@ -54,7 +54,7 @@ pipeline {
 
                 nexusPolicyEvaluation failBuildOnNetworkError: false, 
                 iqApplication: 'webgoat8', 
-                iqStage: 'stage', 
+                iqStage: 'stage-release', 
                 iqScanPatterns: [[scanPattern: '*.tar']], 
                 jobCredentialsId: ''
             } 
