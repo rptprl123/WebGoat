@@ -28,8 +28,7 @@ pipeline {
                  },
                  'Build Container': {
                     sh '''
-                        cd webgoat-server
-                        mvn -B install docker:build
+                        mvn -pl webgoat-server docker:build
                     '''
                  })
             }
