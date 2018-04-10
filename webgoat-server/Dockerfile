@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-slim
 
-ARG webgoat_version=8.0-SNAPSHOT
+ARG webgoat_version=8.0.0.M3
 
 RUN \
   apt-get update && apt-get install && \
