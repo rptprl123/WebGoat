@@ -13,11 +13,6 @@ pipeline {
                     mvn -B install -Dmaven.test.skip=true
                 ''' 
             }
-            post {
-                always {
-                    junit '**/target/surefire-reports/**/*.xml' 
-                }      
-            }
         }
         stage('Scan App - Build Container') {
             steps{
