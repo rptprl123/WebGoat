@@ -28,7 +28,8 @@ pipeline {
                  },
                  'Build Container': {
                     sh '''
-                        mvn -pl webgoat-server spring-boot:run
+                        cd webgoat-server
+                        mvn -B docker:build
                     '''
                  })
             }
