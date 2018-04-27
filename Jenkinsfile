@@ -29,7 +29,7 @@ pipeline {
                  'Build Container': {
                     sh '''
                         cd webgoat-server
-                        mvn -B docker:build
+                        docker build -t webgoat/webgoat-8.0 .
                     '''
                  })
             }
