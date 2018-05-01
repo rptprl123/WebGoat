@@ -1,7 +1,9 @@
 pipeline { 
     agent none
     stages {
-        agent jdk8
+        agent {
+            label=jdk8
+        }
         stage ('Build') {
             steps {
                 sh '''
