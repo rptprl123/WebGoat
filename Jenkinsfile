@@ -53,7 +53,7 @@ docker build -t webgoat/webgoat-8.0 .
         }
         stage('error') {
           steps {
-            sh 'docker save webgoat/webgoat-8.0 -o ${env.WORKSPACE}/webgoat.tar'
+            sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
             nexusPolicyEvaluation(iqStage: 'stage', iqApplication: 'webgaot8')
           }
         }
