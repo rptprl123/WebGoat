@@ -1,11 +1,11 @@
-pipeline { 
-    agent {
-        label 'jdk8'
-    }
-    stages {
-        stage ('Build') {
-            steps {
-                sh '''
+pipeline {
+  agent {
+    label 'jdk8'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     mvn -B install -Dmaven.test.skip=true
@@ -41,15 +41,15 @@ pipeline {
       post {
         success {
           echo '...the Test Scan Passed!'
-          
+
         }
-        
+
         failure {
           echo '...the Test  FAILED'
           error '...the Container Test FAILED'
-          
+
         }
-        
+
       }
     }
     stage('Scan Container') {
@@ -61,16 +61,16 @@ pipeline {
         success {
           echo '...the IQ Scan PASSED'
           postGitHub(commitId, 'success', 'analysis', 'Nexus Lifecycle Container Analysis succeeded', "${policyEvaluationResult.applicationCompositionReportUrl}")
-          
+
         }
-        
+
         failure {
           echo '...the IQ Scan FAILED'
           postGitHub(commitId, 'failure', 'analysis', 'Nexus Lifecycle Containe Analysis failed', "${policyEvaluationResult.applicationCompositionReportUrl}")
           error '...the IQ Scan FAILED'
-          
+
         }
-        
+
       }
     }
     stage('Publish Container') {
