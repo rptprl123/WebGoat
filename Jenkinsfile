@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 pipeline { 
     agent none
     tools {
@@ -10,14 +9,6 @@ pipeline {
         stage ('Build') {
             steps {
                 sh '''
-=======
-pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh '''
->>>>>>> origin/develop
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     mvn -B install -Dmaven.test.skip=true
