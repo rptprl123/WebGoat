@@ -2,7 +2,7 @@ pipeline {
     agent none
     stages {
         agent {
-            label=jdk8
+            label 'jdk8'
         }
         stage ('Build') {
             steps {
