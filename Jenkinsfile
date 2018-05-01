@@ -37,7 +37,7 @@ docker build -t webgoat/webgoat-8.0 .
         catchError() {
           echo 'Test Container here'
           sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
-          nexusPolicyEvaluation(iqStage: 'stage', iqApplication: 'webgoat8')
+          nexusPolicyEvaluation(iqStage: 'Stage', iqApplication: 'webgoat8')
         }
 
       }
