@@ -32,14 +32,21 @@ docker build -t webgoat/webgoat-8.0 .
       }
     }
     stage('Test Container') {
-      steps {
-        sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
-        catchError() {
-          echo 'Test Container here'
-          sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
-          nexusPolicyEvaluation(iqStage: 'Stage', iqApplication: 'webgoat8')
-        }
+      parallel {
+        stage('Test Container') {
+          steps {
+            catchError() {
+              echo 'Test Container here'
+            }
 
+          }
+        }
+        stage('IQ-Scan Container') {
+          steps {
+            sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
+            nexusPolicyEvaluation(iqStage: 'Stage', iqApplication: 'webgoat8')
+          }
+        }
       }
     }
     stage('Publish Container') {
