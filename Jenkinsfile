@@ -1,10 +1,11 @@
 pipeline { 
-    agent any
+    agent none
     tools {
       maven 'M3'
       jdk 'jdk8'
     }
     stages {
+        agent jdk8
         stage ('Build') {
             steps {
                 sh '''
