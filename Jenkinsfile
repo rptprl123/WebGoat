@@ -26,9 +26,8 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            sh '''
-                        cd webgoat-server
-                        docker build -t webgoat/webgoat-8.0 .
+            sh '''cd webgoat-server
+docker build -t webgoat/webgoat-8.0 .
                     '''
           }
         }
@@ -54,9 +53,9 @@ pipeline {
 
           }
         }
-        stage('') {
+        stage('error') {
           steps {
-            sh '"docker save webgoat/webgoat-8.0 -o ${env.WORKSPACE}/webgoat.tar"'
+            sh 'docker save webgoat/webgoat-8.0 -o ${env.WORKSPACE}/webgoat.tar'
             nexusPolicyEvaluation(iqStage: 'stage', iqApplication: 'webgaot8')
           }
         }
