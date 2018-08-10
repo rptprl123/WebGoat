@@ -47,6 +47,11 @@ docker build -t webgoat/webgoat-8.0 .
             nexusPolicyEvaluation(iqStage: 'Stage', iqApplication: 'webgoat8')
           }
         }
+        stage('Klar') {
+          steps {
+            sh '#Execute Klar for container inspection'
+          }
+        }
       }
     }
     stage('Publish Container') {
