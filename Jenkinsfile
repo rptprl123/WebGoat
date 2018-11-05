@@ -6,7 +6,7 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    mvn -B install -Dmaven.test.skip=true
+                    mvn -B install
                 '''
       }
     }
