@@ -34,8 +34,7 @@ docker build -t webgoat/webgoat-8.0 .
       parallel {
         stage('Anchore OS Scan') {
           steps {
-            sh '''sh \'echo "$REGISTRY/$IMAGENAME:${BUILD_VERSION} ${WORKSPACE}/Dockerfile" > anchore_images\'
-anchore \'anchore_images\''''
+            anchore(anchoreioPass: 'foobar', anchoreioUser: 'admin', name: 'webgoat/webgoat:8.0')
           }
         }
         stage('IQ-Scan Application') {
