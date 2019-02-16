@@ -32,15 +32,13 @@ docker build -t webgoat/webgoat-8.0 .
     }
     stage('Test Container') {
       parallel {
-        stage('Test Container') {
+        stage('Anchore OS Scan') {
           steps {
-            catchError() {
-              echo 'Test Container here'
-            }
-
+            sh '''sh \'echo "$REGISTRY/$IMAGENAME:${BUILD_VERSION} ${WORKSPACE}/Dockerfile" > anchore_images\'
+anchore \'anchore_images\''''
           }
         }
-        stage('IQ-Scan Container') {
+        stage('IQ-Scan Application') {
           steps {
             sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
             nexusPolicyEvaluation(iqStage: 'stage-release', iqApplication: 'webgoat8', iqScanPatterns: [[scanPattern: 'webgoat.tar']])
