@@ -25,7 +25,8 @@ pipeline {
           steps {
             sh '''cd webgoat-server
 whoami
-docker build -t webgoat/webgoat-8.0 .
+pwd
+/usr/local/docker build -t webgoat/webgoat-8.0 .
                     '''
           }
         }
