@@ -6,7 +6,7 @@ pipeline {
         sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    mvn -B install '''
+                    mvn -B  install -DskipTests'''
       }
     }
     stage('Scan App - Build Container') {
