@@ -1,9 +1,5 @@
 pipeline {
   agent any
-  tools {
-      maven 'M3'
-      jdk 'jdk8'
-    }
   stages {
     stage('Build') {
       steps {
@@ -63,5 +59,6 @@ docker build -t webgoat/webgoat-8.0 .
   }
   tools {
     maven 'M3'
+    jdk 'jdk8'
   }
 }
