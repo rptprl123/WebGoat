@@ -60,6 +60,5 @@ docker build -t webgoat/webgoat-8.0 .
   tools {
     maven 'M3'
     jdk 'JDK8'
-    docker 'docker'
   }
 }
