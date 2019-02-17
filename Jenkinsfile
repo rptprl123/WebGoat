@@ -24,6 +24,7 @@ pipeline {
         stage('Build Container') {
           steps {
             sh '''cd webgoat-server
+whoami
 docker build -t webgoat/webgoat-8.0 .
                     '''
           }
