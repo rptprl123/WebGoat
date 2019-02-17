@@ -23,10 +23,12 @@ pipeline {
         }
         stage('Build Container') {
           steps {
-            sh '''cd webgoat-server
+            sh '''#!/bin/bash
+cd webgoat-server
 whoami
 pwd
-/usr/local/docker build -t webgoat/webgoat-8.0 .
+echo $PATH
+docker build -t webgoat/webgoat-8.0 .
                     '''
           }
         }
