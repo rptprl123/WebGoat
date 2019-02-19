@@ -28,7 +28,9 @@ cd webgoat-server
 whoami
 pwd
 echo $PATH
-docker build -t webgoat/webgoat-8.0:latest .
+docker build -t --no-cache webgoat/webgoat-8.0:latest .
+docker tag webgoat/webgoat-8.0:latest registry.mycompany.com/webgoat/webgoat-8.0:latest
+docker push registry.mycompany.com/webgoat/webgoat-8.0:latest
 '''
           }
         }
