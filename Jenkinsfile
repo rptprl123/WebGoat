@@ -28,8 +28,8 @@ cd webgoat-server
 whoami
 pwd
 echo $PATH
-docker build -t webgoat/webgoat-8.0 .
-                    '''
+docker build -t registry.mycompany.com/webgoat/webgoat-8.0:latest .
+docker push registry.mycompany.com/webgoat/webgoat-8.0:latest                   '''
           }
         }
       }
@@ -38,8 +38,8 @@ docker build -t webgoat/webgoat-8.0 .
       parallel {
         stage('Anchore OS Scan') {
           steps {
-            sh 'echo "webgoat:webgoat-8.0 ${WORKSPACE}/webgoat-server/Dockerfile" > anchore_images'
-          anchore 'anchore_images'
+            sh 'echo "webgoat/webgoat-8.0 ${WORKSPACE}/webgoat-server/Dockerfile" > anchore_images'
+            anchore 'anchore_images'
           }
         }
         stage('IQ-Scan Application') {
