@@ -38,7 +38,7 @@ docker build -t webgoat/webgoat-8.0:latest .
       parallel {
         stage('Anchore OS Scan') {
           steps {
-            sh 'echo "webgoat/webgoat-8.0 ${WORKSPACE}/webgoat-server/Dockerfile" > anchore_images'
+            sh 'echo "registry.mycompany.com/webgoat/webgoat-8.0 ${WORKSPACE}/webgoat-server/Dockerfile" > anchore_images'
             anchore 'anchore_images'
           }
         }
