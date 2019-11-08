@@ -3,6 +3,7 @@
 /target/
 /.classpath
 /.project
+**/.factorypath
 /.settings/.jsdtscope
 /.settings/org.eclipse.jdt.core.prefs
 /.settings/org.eclipse.m2e.core.prefs
