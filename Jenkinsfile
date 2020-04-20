@@ -41,20 +41,10 @@ docker push 192.168.0.56/webgoat/webgoat-8.0:latest
         }
       }
     }
-    stage('Test Container') {
-      parallel {
-        stage('Anchore OS Scan') {
-          steps {
-            sh 'echo "nexus:5000/webgoat/webgoat-8.0 ${WORKSPACE}/webgoat-server/Dockerfile" > anchore_images'
-            anchore 'anchore_images'
-          }
-        }
         stage('IQ-Scan Application') {
           steps {
             sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
             nexusPolicyEvaluation(iqStage: 'stage-release', iqApplication: 'webgoat8', iqScanPatterns: [[scanPattern: 'webgoat.tar']])
-          }
-        }
       }
     }
     stage('Publish Container') {
