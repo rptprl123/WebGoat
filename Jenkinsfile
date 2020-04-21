@@ -9,7 +9,7 @@ pipeline {
                     mvn -B  install -DskipTests'''
       }
     }
-    stage('Scan App - Build Container') {
+    stage('Build App - Scan') {
       parallel {
         stage('IQ-BOM') {
           steps {
@@ -21,7 +21,9 @@ pipeline {
             echo '...run SonarQube or other SAST tools here'
           }
         }
-        stage('Build Container') {
+      }
+    }
+         stage('Build Container') {
           steps {
             sh '''#!/bin/bash
 cd webgoat-server
@@ -33,28 +35,21 @@ echo "Login"
 docker build --no-cache -t webgoat/webgoat-8.0:latest .
 echo "build"
 docker images
-echo "Images"
-docker tag webgoat/webgoat-8.0:latest 192.168.0.56/webgoat/webgoat-8.0:latest
-docker push 192.168.0.56/webgoat/webgoat-8.0:latest
 '''
           }
         }
-      }
-    }
-        stage('IQ-Scan Application') {
+
+        stage('Docker Container Scan') {
           steps {
             sh 'docker save webgoat/webgoat-8.0 -o $WORKSPACE/webgoat.tar'
             nexusPolicyEvaluation(iqStage: 'stage-release', iqApplication: 'webgoat8', iqScanPatterns: [[scanPattern: 'webgoat.tar']])
       }
     }
-    stage('Publish Container') {
-      when {
-        branch 'master'
-      }
+    stage('Container Harbor Push') {
       steps {
         sh '''
-                    docker tag webgoat/webgoat-8.0 192.168.0.56/webgoat/webgoat-8.0:8.0
-                    docker push 192.168.0.56/webgoat/webgoat-8.0
+                    docker tag webgoat/webgoat-8.0:latest 192.168.0.56/webgoat/webgoat-8.0:latest
+                    docker push 192.168.0.56/webgoat/webgoat-8.0:latest
                 '''
       }
     }
