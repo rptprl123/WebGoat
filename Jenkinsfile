@@ -30,7 +30,7 @@ cd webgoat-server
 whoami
 pwd
 echo $PATH
-docker login 192.168.0.56 -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+docker login 192.168.0.231 -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 echo "Login"
 docker build --no-cache -t webgoat/webgoat-8.0:latest .
 echo "build"
@@ -48,8 +48,8 @@ docker images
     stage('Container Harbor Push') {
       steps {
         sh '''
-                    docker tag webgoat/webgoat-8.0:latest 192.168.0.56/webgoat/webgoat-8.0:latest
-                    docker push 192.168.0.56/webgoat/webgoat-8.0:latest
+                    docker tag webgoat/webgoat-8.0:latest 192.168.0.231/webgoat/webgoat-8.0:latest
+                    docker push 192.168.0.231/webgoat/webgoat-8.0:latest
                 '''
       }
     }
